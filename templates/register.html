@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %} <title>Flasker - {{ title }}</title> {% endblock title %}
+{% block css %} <link rel="stylesheet" href="/static/register.css"> {% endblock css %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <div class="flashed-msg">
+        <li class="flashes">{{ message }}</li>
+      </div>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h1 class="heading_register">Create Acount</h1>
+    <form method="POST" action="/user-add">
+      <h3 class="join">Join Today</h3>
+
+        {{ form.csrf_token }}
+
+        {{ form.name.label(class=label) }} {{ form.name(class=name) }}
+
+        {{ form.username.label(class=label) }} {{ form.username(class=username) }}
+
+        {{ form.email.label(class=label) }} {{ form.email(class=email) }}
+
+        {{ form.passion.label(class=label) }} {{ form.passion(class=passion) }}
+
+        {{ form.password.label(class=label) }} {{ form.password(class=password) }}
+
+        {{ form.about_author.label(class=label) }} {{ form.about_author(class=about, cols=69 , rows=10) }}
+
+        {{ form.submit }}
+
+        <input type="submit" class="btn" value="Sign Up">
+    </form>
+    <h4 class="account">Already Have An Account? <a href="/login">Login</a></h4>
+{% endblock content %}

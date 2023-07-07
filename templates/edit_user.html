@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% block title %} <title>Flasker - {{ title }}</title> {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="/static/edit_user.css">
+{% endblock css %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+  {% for message in messages %}
+  <div class="flashed-msg">
+    <li class="flashes">{{ message }}</li>
+  </div>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+  <div class="update_dashboard_user">
+    <form action="{{url_for('edit_user')}}" method="POST">
+
+      {{ form.csrf_token }}
+
+      {{ form.name.label(class=label) }} {{ form.name(class=name) }}
+
+      {{ form.username.label(class=label) }} {{ form.username(class=username) }}
+
+      {{ form.email.label(class=label) }} {{ form.email(class=email) }}
+
+      {{ form.passion.label(class=label) }} {{ form.passion(class=passion) }}
+
+      {{ form.about_author.label(class=label) }} {{ form.about_author(class=passion, cols=69 , rows=10) }}
+
+      <input type="submit" class="btn" value="Update">
+    </form>
+  </div>
+{% endblock content %}

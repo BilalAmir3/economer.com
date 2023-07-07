@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+{% block title %} <title>Flasker - {{ title }}</title> {% endblock title %}
+{% block css %}<link rel="stylesheet" href="/static/add_post.css">{% endblock css %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <div class="flashed-msg">
+        <li class="flashes">{{ message }}</li>
+      </div>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<h2 class="add_post">Edit Post.......</h2>
+<form method="POST">
+  {{ form.csrf_token }}
+
+  {{ form.title.label }} {{ form.title(size=20) }}
+
+  {{ form.content.label }} {{ form.content(cols=92 , rows=18) }}
+
+<div class="set">
+  <input class='edit' type="submit" value="Edit Post">
+  <a class="hello" href="{{ url_for('posts') }}"><span>Back To Blog</span></a>
+</div>
+</form>
+
+{% endblock content %}

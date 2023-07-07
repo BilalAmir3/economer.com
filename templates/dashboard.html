@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% block title %} <title>Flasker - {{ title }}</title> {% endblock title %}
+{% block css %}
+  <link rel="stylesheet" href="/static/dashboard.css">
+{% endblock css %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul>
+      {% for message in messages %}
+      <div class="flashed-msg">
+        <li class="flashes">{{ message }}</li>
+      </div>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+
+<div class="dashboard">
+  <h3 class="heading_dashboard">Welcome To Dashboard {{ current_user.name }}!</h3>
+<h2 class="heading_user">User Info</h2>
+{% if current_user.is_authenticated %}
+<h1>Name: <span>{{ current_user.name }}</span></h1>
+<h1>Username: <span>{{ current_user.username }}</span></h1>
+<h1>User ID: <span>{{ current_user.id }}</span></h1> 
+<h1>Email: <span>{{ current_user.email }}</span></h1>
+<h1>Passion: <span>{{ current_user.passion }}</span></h1>
+{% if current_user.about_author %}
+  <h1>About Author: <span>{{ current_user.about_author }}</span></h1>
+{% endif %}
+<h1>Date Joined: <span>{{ current_user.date_joined.strftime('%d %B %Y') }}</span></h1> 
+<a href="/logout" class="logout">Logout</a>
+<a href="{{url_for('edit_user')}}" class="edit">Edit Profile</a>
+<a href="{{url_for('delete_user')}}" class="delete">Delete Profile</a>
+{% endif %}
+</div>
+
+{% endblock content %}

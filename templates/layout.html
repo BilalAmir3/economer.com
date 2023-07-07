@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} <title>Flasker - {{ title }}</title>{% endblock title %}
+    <link rel="stylesheet" href="/static/layout.css">
+    {% block css %} <link rel="stylesheet" href="/static/home.css"> {% endblock css %}
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="heading">
+                <h2 class="webname">Flasker</h2>
+            </div>
+            <div class="info">
+                <ul>
+                    {% if current_user.is_authenticated %}
+                        <li><a href="/add_post">Add Post</a></li>
+                        <li class="a1"><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="/posts">Posts</a></li>
+                        <li><a href="/logout">Logout</a></li>
+                    {% else %}
+                        <li><a href="/register">Register</a></li>
+                        <li><a href="/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock content %}
+    </main>
+</body>
+</html>
